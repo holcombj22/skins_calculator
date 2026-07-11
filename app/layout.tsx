@@ -12,21 +12,8 @@ export const metadata: Metadata = {
     'Calculate skins game results for golf. Set players, holes, and pot, then see who wins each skin.',
   generator: 'v0.app',
   icons: {
-    icon: [
-      {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
-    ],
-    apple: '/apple-icon.png',
+    icon: '/flag_icon.png',
+    apple: '/flag_icon.png',
   },
 }
 
