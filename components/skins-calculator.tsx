@@ -1,7 +1,7 @@
 "use client"
 
 import { useMemo, useState } from "react"
-import { Flag, Plus, Trash2, DollarSign, RotateCcw, Trophy } from "lucide-react"
+import { Flag, Plus, Trash2, DollarSign, RotateCcw, Trophy, ArrowRightLeft } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { calculateSkins, type Player } from "@/lib/skins"
 import { Scorecard } from "@/components/scorecard"
@@ -22,6 +22,7 @@ const DEFAULT_HOLES = 18
 export function SkinsCalculator() {
   const [holes, setHoles] = useState<9 | 18>(DEFAULT_HOLES)
   const [pot, setPot] = useState<string>("100")
+  const [carryOver, setCarryOver] = useState<boolean>(true)
   const [players, setPlayers] = useState<Player[]>(() => [
     makePlayer("Player 1", DEFAULT_HOLES),
     makePlayer("Player 2", DEFAULT_HOLES),
@@ -33,8 +34,8 @@ export function SkinsCalculator() {
   }, [pot])
 
   const result = useMemo(
-    () => calculateSkins(players, holes, potNumber),
-    [players, holes, potNumber],
+    () => calculateSkins(players, holes, potNumber, carryOver),
+    [players, holes, potNumber, carryOver],
   )
 
   function setHoleCount(count: 9 | 18) {
@@ -116,6 +117,30 @@ export function SkinsCalculator() {
               </button>
             ))}
           </div>
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <label className="text-sm font-medium">Carry overs</label>
+          <button
+            type="button"
+            role="switch"
+            aria-checked={carryOver}
+            onClick={() => setCarryOver((prev) => !prev)}
+            className={
+              "flex items-center gap-2 rounded-lg border px-4 py-2.5 text-sm font-semibold transition-colors " +
+              (carryOver
+                ? "border-primary bg-primary text-primary-foreground"
+                : "border-border bg-background text-foreground hover:bg-accent")
+            }
+          >
+            <ArrowRightLeft className="size-4" aria-hidden="true" />
+            {carryOver ? "Carry overs on" : "Carry overs off"}
+          </button>
+          <p className="text-xs text-muted-foreground">
+            {carryOver
+              ? "Tied holes push the skin forward to the next hole"
+              : "Tied holes are voided — skin is not awarded"}
+          </p>
         </div>
 
         <div className="flex flex-col gap-2">
