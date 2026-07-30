@@ -87,7 +87,7 @@ export function SkinsCalculator() {
       <header className="flex flex-col gap-2">
         <div className="flex items-center gap-2 text-primary">
           <Flag className="size-6" aria-hidden="true" />
-          <span className="text-sm font-semibold uppercase tracking-widest">Golf Skins Pro</span>
+          <span className="text-sm font-semibold uppercase tracking-widest">Free Golf Skins Tool</span>
         </div>
         <h1 className="text-balance text-3xl font-bold tracking-tight md:text-4xl">
           Golf Skins Pro
