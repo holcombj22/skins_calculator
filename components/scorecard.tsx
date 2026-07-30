@@ -15,7 +15,7 @@ export function Scorecard({
   const holeNumbers = Array.from({ length: holes }, (_, i) => i + 1)
 
   return (
-    <div className="overflow-x-auto rounded-xl border border-border bg-card">
+    <div className="overflow-x-auto rounded-xl border border-border/80 bg-card shadow-sm">
       <table className="w-full border-collapse text-sm">
         <thead>
           <tr className="border-b border-border bg-muted/60">

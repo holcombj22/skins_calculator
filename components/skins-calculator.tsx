@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { Flag, Plus, Trash2, DollarSign, RotateCcw, Trophy, ArrowRightLeft } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { calculateSkins, type Player } from "@/lib/skins"
@@ -20,6 +20,7 @@ function makePlayer(name: string, holes: number): Player {
 const DEFAULT_HOLES = 18
 
 export function SkinsCalculator() {
+  const [isHydrated, setIsHydrated] = useState(false)
   const [holes, setHoles] = useState<9 | 18>(DEFAULT_HOLES)
   const [pot, setPot] = useState<string>("100")
   const [carryOver, setCarryOver] = useState<boolean>(true)
@@ -37,6 +38,11 @@ export function SkinsCalculator() {
     () => calculateSkins(players, holes, potNumber, carryOver),
     [players, holes, potNumber, carryOver],
   )
+  const showSkeletons = !isHydrated
+
+  useEffect(() => {
+    setIsHydrated(true)
+  }, [])
 
   function setHoleCount(count: 9 | 18) {
     setHoles(count)
@@ -81,10 +87,10 @@ export function SkinsCalculator() {
       <header className="flex flex-col gap-2">
         <div className="flex items-center gap-2 text-primary">
           <Flag className="size-6" aria-hidden="true" />
-          <span className="text-sm font-semibold uppercase tracking-widest">Golf</span>
+          <span className="text-sm font-semibold uppercase tracking-widest">Golf Skins Pro</span>
         </div>
         <h1 className="text-balance text-3xl font-bold tracking-tight md:text-4xl">
-          Skins Game Calculator
+          Golf Skins Pro
         </h1>
         <p className="max-w-2xl text-pretty leading-relaxed text-muted-foreground">
           Enter your players, choose the number of holes, and set the total pot. The lowest
@@ -95,7 +101,7 @@ export function SkinsCalculator() {
       {/* Setup controls */}
       <section
         aria-label="Game setup"
-        className="grid gap-4 rounded-xl border border-border bg-card p-4 text-card-foreground shadow-sm md:grid-cols-2 md:p-6"
+        className="grid gap-4 rounded-xl border border-border/80 bg-card p-4 text-card-foreground shadow-sm md:grid-cols-2 md:p-6"
       >
         <div className="flex flex-col gap-2">
           <label className="text-sm font-medium">Number of holes</label>
@@ -218,14 +224,60 @@ export function SkinsCalculator() {
           <Trophy className="size-5 text-primary" aria-hidden="true" />
           <h2 className="text-lg font-semibold">Results</h2>
         </div>
-        <ResultsPanel result={result} />
+        {showSkeletons ? <ResultsPanelSkeleton /> : <ResultsPanel result={result} />}
       </section>
 
       {/* Scorecard entry */}
       <section aria-label="Scorecard" className="flex flex-col gap-2">
         <h2 className="text-lg font-semibold">Scorecard</h2>
-        <Scorecard players={players} holes={holes} result={result} onScore={setScore} />
+        {showSkeletons ? (
+          <ScorecardSkeleton holes={holes} />
+        ) : (
+          <Scorecard players={players} holes={holes} result={result} onScore={setScore} />
+        )}
       </section>
+    </div>
+  )
+}
+
+function SkeletonBlock({ className = "" }: { className?: string }) {
+  return <div className={`animate-pulse rounded-md bg-muted ${className}`} aria-hidden="true" />
+}
+
+function ResultsPanelSkeleton() {
+  return (
+    <div className="flex flex-col gap-4">
+      <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
+        {[0, 1, 2, 3].map((i) => (
+          <div key={i} className="rounded-xl border border-border bg-card p-3">
+            <SkeletonBlock className="mb-2 h-3 w-2/3" />
+            <SkeletonBlock className="h-6 w-3/4" />
+          </div>
+        ))}
+      </div>
+      <div className="rounded-xl border border-border bg-card p-4">
+        {[0, 1, 2, 3].map((i) => (
+          <SkeletonBlock key={i} className="mb-3 h-4 last:mb-0" />
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function ScorecardSkeleton({ holes }: { holes: number }) {
+  return (
+    <div className="overflow-x-auto rounded-xl border border-border bg-card p-4">
+      <div
+        className="grid gap-2"
+        style={{ gridTemplateColumns: `140px repeat(${holes + 1}, minmax(28px, 1fr))` }}
+      >
+        {Array.from({ length: holes + 2 }, (_, i) => (
+          <SkeletonBlock key={`h-${i}`} className="h-7" />
+        ))}
+        {Array.from({ length: (holes + 2) * 2 }, (_, i) => (
+          <SkeletonBlock key={`r-${i}`} className="h-8" />
+        ))}
+      </div>
     </div>
   )
 }

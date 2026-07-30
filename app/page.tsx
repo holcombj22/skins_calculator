@@ -3,7 +3,7 @@ import { SkinsCalculator } from "@/components/skins-calculator"
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  name: "Golf Skins Calculator",
+  name: "Golf Skins Pro",
   description:
     "Free online golf skins game calculator. Enter players, scores, and the total pot — instantly see who wins each skin and how much they earn.",
   applicationCategory: "SportsApplication",
@@ -28,7 +28,7 @@ export default function Page() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <main className="min-h-dvh bg-background">
+      <main className="min-h-dvh bg-[radial-gradient(circle_at_top,oklch(0.98_0.03_145),transparent_35%),var(--background)]">
         <SkinsCalculator />
       </main>
     </>
