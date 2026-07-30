@@ -10,9 +10,10 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://skinscalculator.com
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
+  applicationName: 'Golf Skins Pro',
   title: {
-    default: 'Golf Skins Calculator',
-    template: '%s | Golf Skins Calculator',
+    default: 'Golf Skins Pro',
+    template: '%s | Golf Skins Pro',
   },
   description:
     'Free online golf skins game calculator. Enter players, scores, and the total pot — instantly see who wins each skin and how much they earn.',
@@ -25,8 +26,8 @@ export const metadata: Metadata = {
     'golf pot calculator',
     'golf skin winnings',
   ],
-  authors: [{ name: 'Golf Skins Calculator' }],
-  creator: 'Golf Skins Calculator',
+  authors: [{ name: 'Golf Skins Pro' }],
+  creator: 'Golf Skins Pro',
   robots: {
     index: true,
     follow: true,
@@ -47,22 +48,22 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     url: siteUrl,
-    title: 'Golf Skins Calculator',
+    title: 'Golf Skins Pro',
     description:
       'Free online golf skins game calculator. Enter players, scores, and the total pot — instantly see who wins each skin and how much they earn.',
-    siteName: 'Golf Skins Calculator',
+    siteName: 'Golf Skins Pro',
     images: [
       {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Golf Skins Calculator — track skins game results hole by hole',
+        alt: 'Golf Skins Pro — track skins game results hole by hole',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Golf Skins Calculator',
+    title: 'Golf Skins Pro',
     description:
       'Free online golf skins game calculator. Enter players, scores, and the total pot — instantly see who wins each skin and how much they earn.',
     images: ['/og-image.png'],

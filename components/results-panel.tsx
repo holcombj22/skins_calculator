@@ -29,7 +29,7 @@ export function ResultsPanel({ result }: { result: SkinsResult }) {
       </div>
 
       {/* Standings */}
-      <div className="overflow-hidden rounded-xl border border-border bg-card">
+      <div className="overflow-hidden rounded-xl border border-border/80 bg-card shadow-sm">
         <div className="grid grid-cols-[auto_1fr_auto_auto] items-center gap-3 border-b border-border bg-muted/60 px-4 py-2.5 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
           <span className="w-6 text-center">#</span>
           <span>Player</span>
@@ -42,7 +42,7 @@ export function ResultsPanel({ result }: { result: SkinsResult }) {
             return (
               <li
                 key={t.id}
-                className="grid grid-cols-[auto_1fr_auto_auto] items-center gap-3 border-b border-border px-4 py-3 last:border-b-0"
+                className="grid grid-cols-[auto_1fr_auto_auto] items-center gap-3 border-b border-border px-4 py-3 last:border-b-0 odd:bg-background even:bg-muted/20"
               >
                 <span className="flex w-6 justify-center">
                   {isLeader ? (
@@ -75,7 +75,7 @@ export function ResultsPanel({ result }: { result: SkinsResult }) {
       </div>
 
       {result.carriedSkins > 0 && (
-        <p className="flex items-center gap-2 rounded-lg border border-gold/40 bg-gold/10 px-3 py-2 text-sm text-gold-foreground">
+        <p className="flex items-center gap-2 rounded-lg border border-gold/40 bg-gold/10 px-3 py-2 text-sm text-gold-foreground shadow-sm">
           <Coins className="size-4 shrink-0" aria-hidden="true" />
           {result.carriedSkins} skin{result.carriedSkins > 1 ? "s" : ""} worth{" "}
           {money(result.unresolvedValue)} {result.carriedSkins > 1 ? "are" : "is"} still up for
@@ -98,7 +98,7 @@ function SummaryTile({
   return (
     <div
       className={
-        "flex flex-col gap-1 rounded-xl border p-3 " +
+        "flex flex-col gap-1 rounded-xl border p-3 shadow-sm " +
         (highlight ? "border-gold/50 bg-gold/10" : "border-border bg-card")
       }
     >
