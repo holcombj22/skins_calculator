@@ -42,15 +42,18 @@ export type SkinsResult = {
 }
 
 /**
- * Calculate a carryover skins game.
+ * Calculate a skins game.
  * The pot is divided evenly by the number of holes -> value per skin.
  * Each hole, the outright lowest score wins all skins in play.
- * A tie for lowest pushes the skin(s) forward to the next hole.
+ * When carryOver is true (default), a tie for lowest pushes the skin(s)
+ * forward to the next hole. When false, tied holes are voided and the
+ * skin for that hole is not awarded.
  */
 export function calculateSkins(
   players: Player[],
   totalHoles: number,
   pot: number,
+  carryOver = true,
 ): SkinsResult {
   const perSkinValue = totalHoles > 0 ? pot / totalHoles : 0
 
@@ -114,18 +117,18 @@ export function calculateSkins(
       })
       carriedSkins = 0
     } else {
-      // Tie -> push
+      // Tie -> push (carry over) or void (no carry over)
       holes.push({
         hole: h + 1,
         scores,
         winnerId: null,
         skinsAwarded: 0,
         value: 0,
-        carried: true,
+        carried: carryOver,
         incomplete: false,
         skinsInPlay,
       })
-      carriedSkins = skinsInPlay
+      carriedSkins = carryOver ? skinsInPlay : 0
     }
   }
 
