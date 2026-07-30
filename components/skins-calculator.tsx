@@ -88,7 +88,7 @@ export function SkinsCalculator() {
         </h1>
         <p className="max-w-2xl text-pretty leading-relaxed text-muted-foreground">
           Enter your players, choose the number of holes, and set the total pot. The lowest
-          score wins the skin on each hole. Ties push the skin forward to the next hole.
+          score wins the skin on each hole.
         </p>
       </header>
 
