@@ -3,7 +3,8 @@ import { SkinsCalculator } from "@/components/skins-calculator"
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  name: "Golf Skins Pro",
+  name: "Golf Skins Calculator",
+  alternateName: ["Golf Skins Pro", "Golf Skins Game Calculator", "Skins Calculator"],
   description:
     "Free online golf skins game calculator. Enter players, scores, and the total pot — instantly see who wins each skin and how much they earn.",
   applicationCategory: "SportsApplication",

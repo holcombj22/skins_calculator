@@ -90,7 +90,7 @@ export function SkinsCalculator() {
           <span className="text-sm font-semibold uppercase tracking-widest">Free Golf Skins Tool</span>
         </div>
         <h1 className="text-balance text-3xl font-bold tracking-tight md:text-4xl">
-          Golf Skins Pro
+          Golf Skins Calculator
         </h1>
         <p className="max-w-2xl text-pretty leading-relaxed text-muted-foreground">
           Enter your players, choose the number of holes, and set the total pot. The lowest
